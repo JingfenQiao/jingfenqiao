@@ -1,1 +1,585 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jingfen Qiao</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+                   'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #2C2825;
+      background: #F5F1EB;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: #C4920C; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ═══════════════════════════════
+       HERO — full-viewport with bg image
+    ═══════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 56vh;
+      background-image: url('watercolor_bg.jpg');
+      background-size: cover;
+      background-position: center center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      width: 100%;
+      padding: 0 48px;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 4px;
+    }
+
+    /* Subtle left-side veil so text stays readable over the lighter watercolor area */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(245,241,235,0.72) 0%,
+        rgba(245,241,235,0.45) 42%,
+        rgba(245,241,235,0.0)  68%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 500px;
+      padding: 44px 0;
+    }
+
+    /* Name */
+    .hero-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 56px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #3D5A7A;
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+
+    .hero-rule {
+      width: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, #B8962A, #5A6B7A 140%);
+      margin: 18px 0 20px;
+      border: none;
+    }
+
+    .hero-title {
+      font-size: 12px;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: #5A6B7A;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-bio {
+      font-size: 15px;
+      color: #2C2825;
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+    .hero-bio a {
+      color: #7A5A08;
+      border-bottom: 1px solid #B8962A;
+      padding-bottom: 1px;
+    }
+    .hero-bio a:hover {
+      text-decoration: none;
+      color: #7B6ED6;
+      border-bottom-color: #7B6ED6;
+    }
+
+    /* Contact icons */
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .contact-row a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(196,160,50,0.6);
+      background: rgba(245,241,235,0.55);
+      color: #C4920C;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .contact-row a:hover {
+      background: #7B6ED6;
+      border-color: #7B6ED6;
+      color: #fff;
+      text-decoration: none;
+    }
+    .contact-row svg { width: 17px; height: 17px; }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(220,175,50,0.9);
+      box-shadow: 0 6px 32px rgba(180,140,20,0.22);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 100%;
+    }
+
+    /* Scroll hint arrow */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(150,130,80,0.6);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint svg { width: 20px; height: 20px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ═══════════════════════════════
+       STICKY NAV
+    ═══════════════════════════════ */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245,241,235,0.90);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(196,160,50,0.25);
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      gap: 0;
+    }
+    .nav-inner a {
+      display: block;
+      padding: 15px 24px;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #9A8E7A;
+      border-bottom: 2.5px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-inner a:hover { color: #2C2825; text-decoration: none; }
+    .nav-inner a.active {
+      color: #C4920C;
+      border-bottom-color: #DDB030;
+    }
+
+    /* ═══════════════════════════════
+       CONTENT
+    ═══════════════════════════════ */
+    .content-wrap {
+      background: #FFFFFF;
+      box-shadow: 0 -1px 0 rgba(196,160,50,0.15), 0 2px 40px rgba(0,0,0,0.04);
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px 100px;
+    }
+
+    .section {
+      padding: 60px 0 44px;
+      border-bottom: 1px solid rgba(196,160,50,0.2);
+    }
+    .section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #C4920C;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+    }
+
+    /* Research */
+    .research-text {
+      font-size: 15px;
+      color: #3A3530;
+      max-width: 720px;
+      line-height: 1.85;
+    }
+    .keywords {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .kw {
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(196,160,50,0.5);
+      background: rgba(196,160,50,0.07);
+      color: #C4920C;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    /* Publications */
+    .pub-list { display: flex; flex-direction: column; gap: 26px; }
+    .pub {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 20px;
+      align-items: start;
+    }
+    .pub-year {
+      font-size: 12px;
+      color: #7B6ED6;
+      font-weight: 700;
+      padding-top: 3px;
+      text-align: right;
+      letter-spacing: 0.3px;
+    }
+    .pub-title {
+      font-weight: 600;
+      color: #2C2825;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+    .pub-authors { color: #6A6560; font-size: 13.5px; margin-bottom: 4px; }
+    .pub-venue { font-size: 13px; color: #7B6ED6; font-style: italic; }
+    .pub-links { margin-top: 8px; display: flex; gap: 8px; }
+    .pub-links a {
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #C4920C;
+      border: 1px solid rgba(196,160,50,0.6);
+      padding: 2px 10px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+    .pub-links a:hover {
+      background: #DDB030;
+      border-color: #DDB030;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Education & Teaching */
+    .edu-list, .teach-list { display: flex; flex-direction: column; gap: 20px; }
+    .edu-item, .teach-item {
+      display: grid;
+      grid-template-columns: 116px 1fr;
+      gap: 0 20px;
+    }
+    .edu-year, .teach-year {
+      font-size: 13px;
+      color: #7B6ED6;
+      padding-top: 2px;
+    }
+    .edu-degree, .teach-role {
+      font-weight: 600;
+      color: #2C2825;
+    }
+    .edu-school, .teach-course {
+      color: #6A6560;
+      font-size: 13.5px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1 class="hero-name">Jingfen<br>Qiao</h1>
+      <hr class="hero-rule"/>
+      <p class="hero-title">Ph.D. Student · University of Amsterdam</p>
+
+      <p class="hero-bio">
+        PhD Candidate in Information Retrieval at the
+        <a href="https://www.uva.nl/" target="_blank">University of Amsterdam (UvA)</a>,
+        supervised by
+        <a href="https://staff.fnwi.uva.nl/e.kanoulas/" target="_blank">Prof. dr. Evangelos Kanoulas</a>
+        and
+        <a href="https://andrewyates.net/" target="_blank">Dr. Andrew Yates</a>.
+      </p>
+
+      <div class="contact-row">
+        <a href="mailto:j.qiao@uva.nl" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7l10 7 10-7"/>
+          </svg>
+        </a>
+        <a href="https://scholar.google.com/" target="_blank" title="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3L1 9l4 2.18V17c0 1.1 3.13 3 7 3s7-1.9 7-3v-5.82L22 9zM12 5.26L18.6 9 12 12.74 5.4 9zm5 9.08c0 .45-2 2.18-5 2.18s-5-1.73-5-2.18v-4.3l5 2.73 5-2.73z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/" target="_blank" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.2 22 16.447 22 12.021 22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="nav-bar" id="main-nav">
+  <div class="nav-inner">
+    <a href="#research"     class="nav-link active">Research</a>
+    <a href="#publications" class="nav-link">Publications</a>
+    <a href="#education"    class="nav-link">Education</a>
+    <a href="#teaching"     class="nav-link">Teaching</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ CONTENT ═══════════════════════════════ -->
+<div class="content-wrap">
+<div class="content">
+
+  <section id="research" class="section">
+    <h2 class="section-title">Research</h2>
+    <p class="research-text">
+      My research aims to build highly effective, scalable, and robust search systems that empower
+      the next generation of AI through architectural innovations in Agentic Retrieval/Reranking
+      and Efficient Representation Learning.
+    </p>
+    <div class="keywords">
+      <span class="kw">LLM-based Retrieval &amp; Reranking</span>
+      <span class="kw">Agentic Search</span>
+      <span class="kw">Learned Sparse Representations</span>
+      <span class="kw">Multimodal Alignment</span>
+    </div>
+  </section>
+
+  <section id="publications" class="section">
+    <h2 class="section-title">Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub">
+        <span class="pub-year">2026</span>
+        <div>
+          <div class="pub-title">Better than Dense? Investigating the Natural Backward Compatibility of Learned Sparse Representations</div>
+          <div class="pub-authors"><strong>Jingfen Qiao</strong>, Gabrielle Poerwawinata, Thong Nguyen, Jia-Huei Ju, Eugene Yang, Evangelos Kanoulas, Andrew Yates</div>
+          <div class="pub-venue">SIGIR 2026</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2026</span>
+        <div>
+          <div class="pub-title">RE-TRIANGLE: Does TRIANGLE Enable Multimodal Alignment Beyond Cosine Similarity in Retrieval?</div>
+          <div class="pub-authors">Arijit Ghosh, Aritra Bandyopadhyay, Chiranjeev Bindra, <strong>Jingfen Qiao</strong></div>
+          <div class="pub-venue">SIGIR 2026</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2026</span>
+        <div>
+          <div class="pub-title">Mitigating Positional Bias in LLM for Listwise Reranking via Calibration and Augmentation</div>
+          <div class="pub-authors"><strong>Jingfen Qiao</strong>, Xinyu Ma, Huang Jin, Dawei Yin, Evangelos Kanoulas, Andrew Yates</div>
+          <div class="pub-venue">ECIR 2026 &nbsp;<span style="color:#C4920C;font-weight:700;">Best Paper</span></div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Reproducibility, Replicability, and Insights into Visual Document Retrieval with Late Interaction</div>
+          <div class="pub-authors"><strong>Jingfen Qiao</strong>, Jia-Huei Ju, Xinyu Ma, Evangelos Kanoulas, Andrew Yates</div>
+          <div class="pub-venue">SIGIR 2025</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">DIVAgent: A Diversified Search Agent that Mimics the Human Search Process</div>
+          <div class="pub-authors">Zhirui Deng, <strong>Jingfen Qiao</strong>, Zhicheng Dou, Ji-Rong Wen, Maarten de Rijke</div>
+          <div class="pub-venue">CIKM 2025</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2025</span>
+        <div>
+          <div class="pub-title">Going Beyond Encoders: Leveraging Decoder Architectures for Learned Sparse Retrieval</div>
+          <div class="pub-authors"><strong>Jingfen Qiao</strong>, Thong Nguyen, Andrew Yates, Evangelos Kanoulas</div>
+          <div class="pub-venue">KEIR 2025</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <span class="pub-year">2022</span>
+        <div>
+          <div class="pub-title">Intelligent Diagnosis of Northern Corn Leaf Blight with Deep Learning Models</div>
+          <div class="pub-authors">Shuaiqun Pan, <strong>Jingfen Qiao</strong>, Rui Wang, Huilin Yu, Cheng Wang, Kerry Taylor, Hongyu Pan</div>
+          <div class="pub-venue">Journal of Integrative Agriculture, 21(4):1094–1105</div>
+          <div class="pub-links"><a href="#">PDF</a></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education" class="section">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <span class="edu-year">Oct 2022 – Present</span>
+        <div>
+          <div class="edu-degree">PhD Candidate in Computer Science</div>
+          <div class="edu-school">University of Amsterdam, The Netherlands</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <span class="edu-year">Feb 2019 – Dec 2021</span>
+        <div>
+          <div class="edu-degree">Master of Computing</div>
+          <div class="edu-school">Australian National University, Canberra</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <span class="edu-year">Sep 2013 – Jun 2017</span>
+        <div>
+          <div class="edu-degree">BSc (Hons) Marketing Management</div>
+          <div class="edu-school">Kingston University, London</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="teaching" class="section">
+    <h2 class="section-title">Teaching &amp; Mentoring</h2>
+    <div class="teach-list">
+
+      <div class="teach-item">
+        <span class="teach-year">2025 – Present</span>
+        <div>
+          <div class="teach-role">Student Supervision</div>
+          <div class="teach-course">University of Amsterdam — Master's theses &amp; research projects</div>
+        </div>
+      </div>
+
+      <div class="teach-item">
+        <span class="teach-year">2023 – 2025</span>
+        <div>
+          <div class="teach-role">Teaching Assistant</div>
+          <div class="teach-course">Information Retrieval 2 — University of Amsterdam</div>
+        </div>
+      </div>
+
+      <div class="teach-item">
+        <span class="teach-year">Feb – May 2020</span>
+        <div>
+          <div class="teach-role">Teaching Assistant</div>
+          <div class="teach-course">Data Wrangling — Australian National University</div>
+        </div>
+      </div>
+
+      <div class="teach-item">
+        <span class="teach-year">2014 – 2016</span>
+        <div>
+          <div class="teach-role">Teaching Assistant</div>
+          <div class="teach-course">Web Development — Kingston University</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-15% 0px -65% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
