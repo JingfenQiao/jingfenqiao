@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yichen Wang - Academic Portfolio</title>
+    <style>
+        /* 基础页面设置，融入淡淡的艺术水墨色彩 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #fcfbf8; 
+            color: #333;
+            /* 模拟图片中淡淡的色彩晕染效果 */
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(220, 224, 235, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(228, 212, 185, 0.3) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* 核心内容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        /* 姓名大标题 */
+        h1 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 4.5rem;
+            color: #9b8259; /* 提取图片中的暗金色 */
+            letter-spacing: 3px;
+            margin: 0 0 10px 0;
+            font-weight: normal;
+        }
+
+        /* 职位/身份副标题 */
+        .subtitle {
+            font-size: 1rem;
+            color: #7a7a7a;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #e0d5c1;
+            padding-bottom: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        /* 关于我区块 */
+        .about-section {
+            max-width: 650px;
+            position: relative;
+        }
+
+        .about-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.4rem;
+            color: #9b8259;
+            margin-bottom: 15px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+        }
+
+        /* 装饰性线条 */
+        .decorative-line {
+            width: 60px;
+            height: 1px;
+            background-color: #9b8259;
+            margin: 40px 0;
+        }
+
+        /* 导航链接扩展（方便您后续添加更多页面） */
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #9b8259;
+        }
+
+        /* 响应式设计：适配手机屏幕 */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .container { padding: 60px 20px; }
+            .nav-links { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>YICHEN WANG</h1>
+        <div class="subtitle">PHD CANDIDATE | RESEARCHER | ACADEMIC PORTFOLIO</div>
+
+        <div class="about-section">
+            <div class="about-title">ABOUT ME</div>
+            <div class="about-text">
+                Dedicated to exploring the intersections of Computational Neuroscience, Machine Learning, and Cognitive Science at [University Name]. Striving for depth, innovation, and knowledge discovery.
+            </div>
+        </div>
+
+        <div class="decorative-line"></div>
+
+        <div class="nav-links">
+            <a href="#publications">Publications</a>
+            <a href="#research">Research & Projects</a>
+            <a href="#cv">Curriculum Vitae</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+</body>
+</html>
